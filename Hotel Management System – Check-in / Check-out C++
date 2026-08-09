@@ -1,0 +1,102 @@
+#include <iostream>
+using namespace std;
+
+class Hotel {
+private:
+    int roomNo;
+    string customerName;
+    bool checkedIn;
+
+public:
+    Hotel() {
+        roomNo = 0;
+        customerName = "";
+        checkedIn = false;
+    }
+
+    void checkIn() {
+        if (checkedIn) {
+            cout << "\nCustomer is already checked in.\n";
+            return;
+        }
+
+        cout << "\nEnter Room Number: ";
+        cin >> roomNo;
+
+        cout << "Enter Customer Name: ";
+        cin.ignore();
+        getline(cin, customerName);
+
+        checkedIn = true;
+
+        cout << "\nCheck-in successful!\n";
+        cout << "Room Number: " << roomNo << endl;
+        cout << "Customer Name: " << customerName << endl;
+    }
+
+    void checkOut() {
+        if (!checkedIn) {
+            cout << "\nNo customer is currently checked in.\n";
+            return;
+        }
+
+        cout << "\n----- Check-out Details -----\n";
+        cout << "Room Number: " << roomNo << endl;
+        cout << "Customer Name: " << customerName << endl;
+
+        checkedIn = false;
+        roomNo = 0;
+        customerName = "";
+
+        cout << "Check-out successful!\n";
+    }
+
+    void displayStatus() {
+        if (checkedIn) {
+            cout << "\nRoom Number: " << roomNo << endl;
+            cout << "Customer Name: " << customerName << endl;
+            cout << "Status: Checked-in\n";
+        } else {
+            cout << "\nNo customer is currently checked in.\n";
+        }
+    }
+};
+
+int main() {
+    Hotel hotel;
+    int choice;
+
+    do {
+        cout << "\n===== HOTEL MANAGEMENT SYSTEM =====\n";
+        cout << "1. Check-in\n";
+        cout << "2. Check-out\n";
+        cout << "3. Display Status\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                hotel.checkIn();
+                break;
+
+            case 2:
+                hotel.checkOut();
+                break;
+
+            case 3:
+                hotel.displayStatus();
+                break;
+
+            case 4:
+                cout << "\nThank you!\n";
+                break;
+
+            default:
+                cout << "\nInvalid choice!\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
